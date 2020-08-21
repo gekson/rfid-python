@@ -1,4 +1,5 @@
 import zeep
+import json
 
 # wsdl = 'http://www.soapclient.com/xml/soapresponder.wsdl'
 wsdl = 'http://www.byjg.com.br/site/webservice.php/ws/cep?WSDL'
@@ -12,4 +13,11 @@ request_data = {
     'UF': 'DF'
 }
 
-print(client.service.obterCEP(**request_data))
+# print(client.service.obterCEP(**request_data))
+
+a = zeep.helpers.serialize_object(client.service.obterCEP(**request_data))
+
+json_object_a = json.loads(json.dumps(a))
+
+# print a['data']['item'][0]['house_id']
+print(json_object_a)
